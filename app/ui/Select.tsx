@@ -18,14 +18,14 @@ export default function Select({ options }: Props) {
   const year = searchParams.get('year') || 0;
 
   interface DataProps {
-    slug: 'year' | 'makeId';
+    params: 'year' | 'makeId';
     input: string;
   }
 
   function handleSelect(data: DataProps) {
     const params = new URLSearchParams(searchParams);
     if (data) {
-      params.set(`${data.slug}`, data.input);
+      params.set(`${data.params}`, data.input);
     } else {
       params.delete("year");
     }
@@ -39,7 +39,7 @@ export default function Select({ options }: Props) {
         className="bg-gray-50 w-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         defaultValue={carId ? carId : "Select car"}
         onChange={(ev) =>
-          handleSelect({ slug: "makeId", input: ev.target.value })
+          handleSelect({ params: "makeId", input: ev.target.value })
         }
       >
         {options.map((item: Manufacturer) => (
@@ -53,7 +53,7 @@ export default function Select({ options }: Props) {
         className="bg-gray-50 w-25 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         defaultValue={year ? year : "Select year"}
         onChange={(ev) =>
-          handleSelect({ slug: "year", input: ev.target.value })
+          handleSelect({ params: "year", input: ev.target.value })
         }
       >
         {arrayOfYears.map((item) => (
