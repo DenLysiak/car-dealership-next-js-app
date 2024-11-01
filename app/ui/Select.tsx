@@ -34,38 +34,54 @@ export default function Select({ options }: Props) {
   }
 
   return (
-    <>
-      <select
-        className="bg-gray-50 w-auto border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        defaultValue={carId ? carId : "Select car"}
-        onChange={(ev) =>
-          handleSelect({ params: "makeId", input: ev.target.value })
-        }
-      >
-        {options.map((item: Manufacturer) => (
-          <option key={item.MakeId} value={`${item.MakeId}`}>
-            {`${item.MakeId} ${item.MakeName} ${item.VehicleTypeId} ${item.VehicleTypeName}`}
-          </option>
-        ))}
-      </select>
+    <div className="block w-full">
+      <div className="block w-full mb-4">
+        <label
+          className="block mb-2 text-sm font-medium text-gray-600 w-full"
+          htmlFor="select_car"
+        >
+          Car manufacturer
+        </label>
+        <select
+          id="select_car"
+          className="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 hover:border-black focus:outline-none"
+          onChange={(ev) => {
+            handleSelect({ params: "makeId", input: ev.target.value });
+          }}
+        >
+          {options.map((item: Manufacturer) => (
+            <option key={item.MakeId} value={`${item.MakeId}`}>
+              {`${item.MakeId} ${item.MakeName} ${item.VehicleTypeId} ${item.VehicleTypeName}`}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <select
-        className="bg-gray-50 w-25 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        defaultValue={year ? year : "Select year"}
-        onChange={(ev) =>
-          handleSelect({ params: "year", input: ev.target.value })
-        }
-      >
-        {arrayOfYears.map((item) => (
-          <option value={item} key={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+      <div className="block w-full md-4">
+        <label
+          className="block mb-2 text-sm font-medium text-gray-600 w-full"
+          htmlFor="select-year"
+        >
+          Year of production
+        </label>
+        <select
+          id="select_year"
+          className="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 hover:border-black focus:outline-none"
+          onChange={(ev) => {
+            handleSelect({ params: "year", input: ev.target.value });
+          }}
+        >
+          {arrayOfYears.map((item) => (
+            <option value={item} key={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <Link
         className={clsx(
-          "bg-gray-50 w-25 border pointer-events-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+          "h-12 mt-4 border pointer-events-none border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 hover:border-black focus:outline-none",
           {
             "pointer-events-auto": carId && year,
           }
@@ -75,6 +91,6 @@ export default function Select({ options }: Props) {
       >
         {"Next ->"}
       </Link>
-    </>
+    </div>
   );
 }
